@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}RatePilot{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/app.css') }}">
+<script defer src="{{ url_for('static',filename='js/app.js') }}"></script>
+{% block head %}{% endblock %}</head><body>
+<header class="nav"><a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">ƒ</span><span>RatePilot</span></a>
+<nav><a href="{{ url_for('home') }}">Overview</a><a href="{{ url_for('converter') }}">Converter</a><a href="{{ url_for('markets') }}">Markets</a><a href="{{ url_for('trends') }}">Trends</a><a href="{{ url_for('compare') }}">Compare</a><a href="{{ url_for('travel') }}">Travel</a></nav>
+<div class="nav-actions"><button class="icon-btn" id="themeBtn" aria-label="Toggle theme">◐</button>{% if logged_in %}<a class="avatar" href="{{ url_for('watchlist') }}">{{ user_name[:1]|upper }}</a><a class="text-btn" href="{{ url_for('logout') }}">Sign out</a>{% else %}<a class="text-btn" href="{{ url_for('login') }}">Sign in</a>{% endif %}</div></header>
+{% with messages=get_flashed_messages() %}{% if messages %}<div class="toast-wrap">{% for m in messages %}<div class="toast">{{m}}</div>{% endfor %}</div>{% endif %}{% endwith %}
+<main>{% block content %}{% endblock %}</main>
+<footer><div><b>RatePilot</b><span>Currency intelligence, simplified.</span></div><div><a href="{{ url_for('converter') }}">Converter</a><a href="{{ url_for('markets') }}">Markets</a><a href="{{ url_for('trends') }}">Trends</a><a href="{{ url_for('travel') }}">Travel Budget</a></div><small>© {{year}} RatePilot</small></footer>
+</body></html>
